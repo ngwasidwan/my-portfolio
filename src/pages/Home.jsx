@@ -12,7 +12,6 @@ function Home() {
           </h1>
           <p className="mb-10 ">
             A frontend web developer passionate about building highly user{" "}
-            <br />
             friendly and professional looking web apps
           </p>
           <GithubLink />
