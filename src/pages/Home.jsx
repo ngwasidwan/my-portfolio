@@ -1,5 +1,4 @@
 import GithubLink from "../components/GithubLink";
-
 function Home() {
   return (
     <main>

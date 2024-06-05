@@ -4,7 +4,7 @@ import { MdEmail } from "react-icons/md";
 import { SiGithub, SiWhatsapp } from "react-icons/si";
 function Contact({ setShowContact }) {
   return (
-    <div className="flex flex-col  absolute  right-2 top-14 gap-8 bg-stone-900  text-stone-900 px-5 py-10 text-xl rounded-md shadow-sm shadow-stone-500 z-10 opacity-90">
+    <div className="flex flex-col  absolute  right-2 top-14 gap-8 bg-stone-900  text-stone-900 px-5 py-10 text-xl rounded-md shadow-sm shadow-stone-500 z-20 opacity-90">
       <AiOutlineX
         className="text-red-500 absolute right-10 top-5 cursor-pointer z-10 hover:opacity-50 "
         onClick={() => setShowContact(false)}

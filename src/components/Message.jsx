@@ -1,43 +1,42 @@
-import { AiOutlineSend } from "react-icons/ai";
-
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import toast, { Toaster } from "react-hot-toast";
+
+import { AiOutlineSend } from "react-icons/ai";
+
+const options = {
+  duration: 2000,
+  className: "bg-stone-200 text-stone-900",
+};
 
 function Message({ showMessageForm, setShowMessageForm }) {
   const form = useRef();
 
+  async function message() {
+    try {
+      await emailjs.sendForm(
+        "service_rhjpsld",
+        "template_bvzx32s",
+        form.current,
+        {
+          publicKey: "Imax2V-IUZCenjQCm",
+        }
+      );
+
+      toast.success("Email sent ", options);
+
+      setTimeout(() => setShowMessageForm(false), 2000);
+    } catch {
+      toast.error(
+        "Failed to send email. Check you internet connection",
+        options
+      );
+    }
+  }
+
   const sendEmail = (e) => {
     e.preventDefault();
-    setShowMessageForm(false);
-
-    const sendMessage = async () => {
-      try {
-        await emailjs.sendForm(
-          "service_rhjpsld",
-          "template_bvzx32s",
-          form.current,
-          {
-            publicKey: "Imax2V-IUZCenjQCm",
-          }
-        );
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-
-    sendMessage();
-    // emailjs
-    //   .sendForm("service_rhjpsld", "template_bvzx32s", form.current, {
-    //     publicKey: "Imax2V-IUZCenjQCm",
-    //   })
-    //   .then(
-    //     () => {
-    //       console.log("SUCCESS!");
-    //     },
-    //     (error) => {
-    //       console.log("FAILED...", error.message);
-    //     }
-    //   );
+    message();
   };
 
   return (
@@ -47,10 +46,12 @@ function Message({ showMessageForm, setShowMessageForm }) {
         `bg-opacity-70 bg-stone-800 fixed z-100 w-full z-10 h-svh top-0 `
       }
     >
+      <Toaster />
       <div className=" bg-stone-900  z-50 right-5 top-28 text-lg rounded-md  overflow-hidden fixed opacity-90 ">
         <p className=" text-center items-center text-stone-100 mt-4">
           Send Me An Email
         </p>
+
         <form
           className="px-8 py-4 text-stone-100"
           onSubmit={sendEmail}
