@@ -1,7 +1,7 @@
 function projects() {
   return (
     <div>
-      <div className="flex gap-10  bg-stone-800 my-12 grid-cols-1  ">
+      <div className="flex gap-10 flex-col md:flex-row  my-12 grid-cols-1  pb-5">
         <figure>
           <img src="/Screenshot-3.png" alt="projects" />
 
