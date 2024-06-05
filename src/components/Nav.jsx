@@ -24,7 +24,7 @@ function Nav({ showContact, setShowContact }) {
         }`}
       >
         <ul
-          className={` ml-auto md:flex md:items-center md:gap-10 md:flex-row md:bg-inherit uppercase text-sm md:static flex flex-col gap-5  bg-stone-900 items-center opacity-70    md:translate-x-0 top-14 transition-all  
+          className={` ml-auto md:flex md:items-center md:gap-10 md:flex-row md:bg-inherit uppercase text-sm md:static flex flex-col gap-5  bg-stone-900 items-center opacity-90    md:translate-x-0 top-14 transition-all  
           h-[90vh] md:h-auto md:pt-2 pt-20 ${
             toggleMenu ? "translate-x-[0%]" : "translate-x-[100%]"
           }  `}
