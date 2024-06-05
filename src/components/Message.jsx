@@ -27,10 +27,10 @@ function Message({ showMessageForm, setShowMessageForm }) {
     <div
       className={
         showMessageForm &&
-        `bg-opacity-70 bg-stone-800 fixed z-100 w-full z-10 h-svh top-0`
+        `bg-opacity-70 bg-stone-800 fixed z-100 w-full z-10 h-svh top-0 `
       }
     >
-      <div className=" bg-stone-900  z-50 right-20 top-28 text-lg rounded-md  overflow-hidden fixed opacity-90 ">
+      <div className=" bg-stone-900  z-50 right-5 top-28 text-lg rounded-md  overflow-hidden fixed opacity-90 ">
         <p className=" text-center items-center text-stone-100 mt-4">
           Send Me An Email
         </p>
