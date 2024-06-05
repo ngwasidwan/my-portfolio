@@ -1,7 +1,7 @@
 import { AiOutlineSend } from "react-icons/ai";
 
 import { useRef } from "react";
-// import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs/browser";
 
 function Message({ showMessageForm, setShowMessageForm }) {
   const form = useRef();
@@ -9,6 +9,23 @@ function Message({ showMessageForm, setShowMessageForm }) {
   const sendEmail = (e) => {
     e.preventDefault();
     setShowMessageForm(false);
+
+    const sendMessage = async () => {
+      try {
+        await emailjs.sendForm(
+          "service_rhjpsld",
+          "template_bvzx32s",
+          form.current,
+          {
+            publicKey: "Imax2V-IUZCenjQCm",
+          }
+        );
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+
+    sendMessage();
     // emailjs
     //   .sendForm("service_rhjpsld", "template_bvzx32s", form.current, {
     //     publicKey: "Imax2V-IUZCenjQCm",
@@ -18,7 +35,7 @@ function Message({ showMessageForm, setShowMessageForm }) {
     //       console.log("SUCCESS!");
     //     },
     //     (error) => {
-    //       console.log("FAILED...", error.text);
+    //       console.log("FAILED...", error.message);
     //     }
     //   );
   };

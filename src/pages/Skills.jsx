@@ -16,7 +16,7 @@ import {
 
 function Skills() {
   return (
-    <div className="grid md:grid-cols-4 grid-cols-2 mt-10 gap-5 ">
+    <div className="grid md:grid-cols-4 grid-cols-2 mt-10 gap-5  pb-5">
       <SkillItems>
         <IoLogoHtml5 className="text-3xl" />
         <p>HTML</p>
