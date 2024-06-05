@@ -4,6 +4,8 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { AiOutlineSend } from "react-icons/ai";
 
+const TIME_OUT = 1000;
+
 const options = {
   duration: 2000,
   className: "bg-stone-200 text-stone-900",
@@ -25,7 +27,7 @@ function Message({ showMessageForm, setShowMessageForm }) {
 
       toast.success("Email sent ", options);
 
-      setTimeout(() => setShowMessageForm(false), 2000);
+      setTimeout(() => setShowMessageForm(false), TIME_OUT);
     } catch {
       toast.error(
         "Failed to send email. Check you internet connection",
