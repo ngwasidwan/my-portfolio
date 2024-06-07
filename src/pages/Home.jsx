@@ -6,22 +6,22 @@ function Home() {
         <div className="md:static absolute left-10 bottom-[-250px] text-stone-400 z-10 ">
           <h1 className="mb-4 sm:mb-6">
             Hello there! I&apos;m{" "}
-            <span className="md:block inline uppercase text-3xl font-bold mt-2">
-              sidwan ,
-            </span>
+            <span className=" uppercase text-3xl font-bold ">sidwan</span>,
           </h1>
           <p className="mb-10 ">
-            A frontend web developer passionate about building highly user{" "}
+            A frontend web developer passionate about building highly user
             friendly and professional looking web apps
           </p>
           <GithubLink />
         </div>
 
-        <img
-          src="/boyz.jpg"
-          alt="my image"
-          className="md:w-3/4 md:h-3/4 object-cover grayscale  rounded-full opacity-50 h-[100px] w-[100px] ml-10 md:ml-0 mb-2"
-        />
+        <div className="md:w-4/5 md:h-[88%] rounded-full overflow-hidden w-[8rem] h-[8rem] md:ml-0  ml-10">
+          <img
+            src="boyz.jpg"
+            alt="my image"
+            className="  grayscale  opacity-50"
+          />
+        </div>
       </div>
     </main>
   );

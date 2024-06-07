@@ -13,7 +13,7 @@ function AppLayout() {
     setShowContact(false);
   }
   return (
-    <div className="bg-stone-900  h-svh text-xl text-gray-300">
+    <div className="   text-xl text-gray-300">
       <main className="w-11/12 mx-auto  ">
         <Nav showContact={showContact} setShowContact={setShowContact} />
 
@@ -26,7 +26,7 @@ function AppLayout() {
         />
       ) : (
         <AiOutlineMessage
-          className="text-[3.5rem] fixed right-20 md:bottom-10 text-blue-200  z-10 bottom-24"
+          className="text-[3.5rem] fixed right-8 md:bottom-10 text-blue-200  z-10 bottom-20"
           role="button"
           title="email me"
           onClick={handleClick}

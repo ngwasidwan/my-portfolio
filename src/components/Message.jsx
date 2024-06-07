@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -13,6 +13,11 @@ const options = {
 
 function Message({ showMessageForm, setShowMessageForm }) {
   const form = useRef();
+  const input = useRef();
+
+  useEffect(() => {
+    input.current.focus();
+  }, []);
 
   async function message() {
     try {
@@ -61,6 +66,7 @@ function Message({ showMessageForm, setShowMessageForm }) {
         >
           <div className="mb-6 ">
             <input
+              ref={input}
               type="text"
               placeholder="Name"
               name="from_name"

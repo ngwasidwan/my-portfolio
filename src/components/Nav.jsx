@@ -4,7 +4,7 @@ import Contact from "../pages/Contact";
 import { MdMenu } from "react-icons/md";
 import { useState } from "react";
 
-import { AiOutlineX } from "react-icons/ai";
+import { BiX } from "react-icons/bi";
 
 const navData = ["home", "skills", "projects"];
 
@@ -55,7 +55,7 @@ function Nav({ showContact, setShowContact }) {
         className="absolute top-5 right-5 md:hidden"
       >
         {toggleMenu ? (
-          <AiOutlineX role="button" className="text-2xl text-red-700" />
+          <BiX role="button" className="text-3xl " />
         ) : (
           <MdMenu role="button" className="text-2xl " />
         )}
