@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import { BiX } from "react-icons/bi";
 import { IoLocation } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
-import { SiGithub, SiWhatsapp } from "react-icons/si";
+import { SiGithub } from "react-icons/si";
 function Contact({ setShowContact }) {
+  useEffect(() => {
+    function handleClick() {
+      setShowContact(false);
+    }
+    document.body.addEventListener("click", handleClick, true);
+    return () => document.body.addEventListener("click", handleClick, true);
+  }, [setShowContact]);
   return (
     <div className="flex flex-col  absolute  right-2 top-14 gap-8 bg-stone-900  text-stone-900 px-5 py-10 text-xl rounded-md shadow-sm shadow-stone-500 z-20 opacity-90">
       <BiX
@@ -17,11 +25,6 @@ function Contact({ setShowContact }) {
       <div className="flex gap-2 items-center text-stone-100">
         <MdEmail />
         <span>: sidwanche@gmail.com</span>
-      </div>
-
-      <div className="flex gap-2 items-center text-green-500">
-        <SiWhatsapp />
-        <span> : +237 675 970 381</span>
       </div>
 
       <div className="flex gap-2 items-center text-stone-200">

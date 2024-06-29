@@ -26,7 +26,7 @@ function AppLayout() {
         />
       ) : (
         <AiOutlineMessage
-          className="text-[3.5rem] fixed right-8 md:bottom-10 text-blue-200  z-10 bottom-20"
+          className="text-[4rem] fixed right-8 md:bottom-10 text-stone-200 z-10 bottom-20 bg-stone-700 p-2 rounded-full"
           role="button"
           title="email me"
           onClick={handleClick}

@@ -6,14 +6,14 @@ function projects() {
           <img src="img-1.png" alt="projects" />
 
           <figcaption className="text-lg mt-4 font-semibold">
-            CityTours
+            City Tours
           </figcaption>
         </figure>
         <figure>
           <img src="img-2.png" alt="projects" />
 
           <figcaption className="text-lg mt-4 font-semibold">
-            EntertainmentApp
+            Entertainment App
           </figcaption>
         </figure>
         <figure>
