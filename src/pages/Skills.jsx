@@ -4,15 +4,15 @@ import {
   IoLogoHtml5,
   IoLogoJavascript,
 } from "react-icons/io";
-import SkillItems from "./SkillItems";
 import { IoLogoReact } from "react-icons/io5";
+import { RiNextjsFill } from "react-icons/ri";
 import {
-  SiPython,
   SiReactquery,
   SiRedux,
   SiStyledcomponents,
   SiTailwindcss,
 } from "react-icons/si";
+import SkillItems from "./SkillItems";
 
 function Skills() {
   return (
@@ -47,6 +47,11 @@ function Skills() {
       </SkillItems>
 
       <SkillItems>
+        <RiNextjsFill className="text-3xl" />
+        <p>Next js</p>
+      </SkillItems>
+
+      <SkillItems>
         <SiTailwindcss className="text-3xl" />
         <p>Tailwind CSS</p>
       </SkillItems>
@@ -54,11 +59,6 @@ function Skills() {
       <SkillItems>
         <SiStyledcomponents className="text-3xl" />
         <p>Styled Components</p>
-      </SkillItems>
-
-      <SkillItems>
-        <SiPython className="text-3xl" />
-        <p>Python</p>
       </SkillItems>
 
       <SkillItems>

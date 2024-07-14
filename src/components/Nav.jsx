@@ -1,9 +1,8 @@
 import { NavLink } from "react-router-dom";
 import Contact from "../pages/Contact";
 
-import { MdMenu } from "react-icons/md";
 import { useState } from "react";
-
+import { MdMenu } from "react-icons/md";
 import { BiX } from "react-icons/bi";
 
 const navData = ["home", "skills", "projects"];
@@ -20,11 +19,11 @@ function Nav({ showContact, setShowContact }) {
     <nav className="flex items-center pt-4 relative ">
       <div
         className={`overflow-hidden md:static absolute right-0 top-14 md:ml-auto   md:w-auto w-full bg-red ${
-          toggleMenu ? "z-20" : ""
+          toggleMenu && "z-20"
         }`}
       >
         <ul
-          className={` ml-auto md:flex md:items-center md:gap-10 md:flex-row md:bg-inherit uppercase text-sm md:static flex flex-col gap-5  bg-stone-900 items-center opacity-90    md:translate-x-0 top-14 transition-all  
+          className={` ml-auto md:flex md:items-center md:gap-10 md:flex-row md:bg-inherit uppercase text-sm md:static flex flex-col gap-5  bg-stone-900 items-center opacity-90  md:translate-x-0 top-14 transition-all  
           h-[90vh] md:h-auto md:pt-2 pt-20 ${
             toggleMenu ? "translate-x-[0%]" : "translate-x-[100%]"
           }  `}

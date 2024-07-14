@@ -3,6 +3,13 @@ function projects() {
     <div>
       <div className="grid md:grid-cols-2 md:gap-10 gap-20 flex-col md:flex-row  my-12 grid-cols-1  pb-5">
         <figure>
+          <img src="img-4.png" alt="projects" />
+
+          <figcaption className="text-lg mt-4 font-semibold">
+            Queen Mother&apos;s Cuisine
+          </figcaption>
+        </figure>
+        <figure>
           <img src="img-1.png" alt="projects" />
 
           <figcaption className="text-lg mt-4 font-semibold">
