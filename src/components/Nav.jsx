@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import Contact from "../pages/Contact";
 
 import { useState } from "react";
 import { MdMenu } from "react-icons/md";
@@ -7,13 +6,8 @@ import { BiX } from "react-icons/bi";
 
 const navData = ["home", "skills", "projects"];
 
-function Nav({ showContact, setShowContact }) {
+function Nav() {
   const [toggleMenu, setToggleMenu] = useState(false);
-
-  function handleClick() {
-    setShowContact((cur) => !cur);
-    setToggleMenu(false);
-  }
 
   return (
     <nav className="flex items-center pt-4 relative ">
@@ -23,7 +17,7 @@ function Nav({ showContact, setShowContact }) {
         }`}
       >
         <ul
-          className={` ml-auto md:flex md:items-center md:gap-10 md:flex-row md:bg-inherit uppercase text-sm md:static flex flex-col gap-5  bg-stone-900 items-center opacity-90  md:translate-x-0 top-14 transition-all  
+          className={` ml-auto md:flex md:items-center md:gap-10 md:flex-row md:bg-inherit uppercase text-sm md:static flex flex-col gap-5  bg-stone-900 items-center opacity-90  md:translate-x-0 top-14 duration-[500ms] transition-all  
           h-[90vh] md:h-auto md:pt-2 pt-20 ${
             toggleMenu ? "translate-x-[0%]" : "translate-x-[100%]"
           }  `}
@@ -40,12 +34,6 @@ function Nav({ showContact, setShowContact }) {
               </NavLink>{" "}
             </li>
           ))}
-          <button
-            onClick={handleClick}
-            className="md:bg-red-700 font-semibold  px-3 py-1  rounded-lg border-2 md:border-red-700 hover:bg-stone-800 md:hover:text-red-500 transition-all hover:opacity-70"
-          >
-            CONTACT
-          </button>
         </ul>
       </div>
 
@@ -59,8 +47,6 @@ function Nav({ showContact, setShowContact }) {
           <MdMenu role="button" className="text-2xl " />
         )}
       </p>
-
-      {showContact && <Contact setShowContact={setShowContact} />}
     </nav>
   );
 }
