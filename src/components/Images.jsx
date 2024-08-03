@@ -6,7 +6,7 @@ function Images({ src, title, link = "" }) {
       {link ? (
         <a
           target="_black"
-          href={link}
+          href="https://easy-travels.vercel.app"
           className="text-sm hover:underline tracking-wide text-blue-400"
         >
           visit app
