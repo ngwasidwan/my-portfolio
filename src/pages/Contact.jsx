@@ -16,7 +16,7 @@ function Contact({ setShowContact, showContact }) {
   return (
     <div
       className={`flex flex-col  absolute ${
-        showContact ? "-translate-y-[30%] " : "-translate-y-[200%] "
+        showContact ? "-translate-y-[20%] " : "-translate-y-[200%] "
       } gap-8 bg-stone-900   px-5 py-10 text-xl rounded-md shadow-sm shadow-stone-500 z-20 opacity-90   transition-all duration-[500ms]`}
     >
       <BiX
