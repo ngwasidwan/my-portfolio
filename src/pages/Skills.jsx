@@ -1,12 +1,10 @@
-import {
-  IoLogoCss3,
-  IoLogoGithub,
-  IoLogoHtml5,
-  IoLogoJavascript,
-} from "react-icons/io";
+import { IoLogoGithub, IoLogoJavascript, IoLogoNodejs } from "react-icons/io";
 import { IoLogoReact } from "react-icons/io5";
 import { RiNextjsFill } from "react-icons/ri";
 import {
+  SiExpress,
+  SiMongodb,
+  SiMongoose,
   SiReactquery,
   SiRedux,
   SiStyledcomponents,
@@ -17,16 +15,6 @@ import SkillItems from "./SkillItems";
 function Skills() {
   return (
     <div className="grid md:grid-cols-4 grid-cols-2 mt-10 gap-5  pb-5">
-      <SkillItems>
-        <IoLogoHtml5 className="text-3xl" />
-        <p>HTML</p>
-      </SkillItems>
-
-      <SkillItems>
-        <IoLogoCss3 className="text-3xl" />
-        <p>CSS</p>
-      </SkillItems>
-
       <SkillItems>
         <IoLogoJavascript className="text-3xl" />
         <p>Javascript</p>
@@ -49,6 +37,26 @@ function Skills() {
       <SkillItems>
         <RiNextjsFill className="text-3xl" />
         <p>Next js</p>
+      </SkillItems>
+
+      <SkillItems>
+        <IoLogoNodejs className="text-3xl" />
+        <p>Node.js</p>
+      </SkillItems>
+
+      <SkillItems>
+        <SiExpress className="text-3xl" />
+        <p>Express</p>
+      </SkillItems>
+
+      <SkillItems>
+        <SiMongodb className="text-3xl" />
+        <p>MongoDB</p>
+      </SkillItems>
+
+      <SkillItems>
+        <SiMongoose className="text-3xl" />
+        <p>Mongoose</p>
       </SkillItems>
 
       <SkillItems>
