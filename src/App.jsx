@@ -1,54 +1,96 @@
-import { Suspense, lazy } from "react";
-import {
-  Navigate,
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
-import AppLayout from "./components/AppLayout";
-import Spinner from "./components/Spinner";
-
-// import Home from "./pages/Home";
-// import Skills from "./pages/Skills";
-// import Projects from "./pages/Projects";
-// import PageNotFound from "./pages/PageNotFound";
-const Home = lazy(() => import("./pages/Home"));
-const Skills = lazy(() => import("./pages/Skills"));
-const Projects = lazy(() => import("./pages/Projects"));
-const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+import Home from "./components/Home";
+import User from "./components/User";
+import Help from "./components/Help";
+import NotFound from "./components/NotFound";
+import { useAppContext } from "./lib/ContextApi";
+import PrevCmd from "./components/PrevCmd";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Navigate to="/home" />,
-    },
+  const { cmdArr, folderInfo } = useAppContext();
 
-    {
-      element: (
-        <Suspense fallback={<Spinner />}>
-          <AppLayout />
-        </Suspense>
-      ),
+  return (
+    <main className="text-white font-mono text-sm tracking-wide flex flex-col ">
+      {cmdArr.map((cmdObj, i) => {
+        const { command: commandStr, pathFound, id } = cmdObj;
 
-      errorElement: <PageNotFound />,
-      children: [
-        {
-          element: <Home />,
-          path: "/home",
-        },
-        {
-          element: <Skills />,
-          path: "/skills",
-        },
-        {
-          element: <Projects />,
-          path: "/projects",
-        },
-      ],
-    },
-  ]);
+        const [command, path] = commandStr.split(" ");
 
-  return <RouterProvider router={router} />;
+        const files = folderInfo.at(i).files;
+        const folders = folderInfo.at(i).folders;
+
+        if (command === "clear") return null;
+
+        if (command === "home") {
+          if (id === 0) return <Home key={id} />;
+          return (
+            <div key={id} className="mb-2">
+              <PrevCmd command={commandStr} id={id} />
+              <Home />
+            </div>
+          );
+        }
+
+        if (command === "help")
+          return (
+            <div key={i} className="mb-2">
+              <PrevCmd command={commandStr} id={id} />
+              <Help />
+            </div>
+          );
+
+        if (command === "cd")
+          return (
+            <div key={i}>
+              <PrevCmd command={commandStr} id={id} />
+
+              {pathFound ? null : !path || path === "." ? null : !pathFound &&
+                path.includes(".") ? (
+                <p>-bash: cd: {path}: Not a directory </p>
+              ) : (
+                <p>-bash: cd: {path}: No such file or directory</p>
+              )}
+            </div>
+          );
+
+        if (command === "ls") {
+          return (
+            <div key={i} className="mb-2">
+              <PrevCmd command={commandStr} id={id} />
+
+              <div className="flex gap-4">
+                {files?.map((el, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    target="_blank"
+                    className=" border-b border-stone-100 "
+                  >
+                    {el}
+                  </a>
+                ))}
+              </div>
+              <div className="flex gap-4">
+                {folders?.map((el, i) => (
+                  <p key={i} className="text-blue-500">
+                    {el}
+                  </p>
+                ))}
+              </div>
+            </div>
+          );
+        }
+
+        return (
+          <div key={i} className="mb-2">
+            <PrevCmd command={commandStr} id={id} />
+            <NotFound command={commandStr} />
+          </div>
+        );
+      })}
+
+      <User />
+    </main>
+  );
 }
 
 export default App;
