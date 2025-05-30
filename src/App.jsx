@@ -13,8 +13,9 @@ function App() {
       {cmdArr.map((cmdObj, i) => {
         const { command: commandStr, pathFound, id } = cmdObj;
 
-        const [command, path] = commandStr.split(" ");
-
+        const [command, ...others] = commandStr.split(" ");
+        const path = others.join(" ");
+        console.log(path);
         const files = folderInfo.at(i).files;
         const folders = folderInfo.at(i).folders;
 
@@ -61,7 +62,7 @@ function App() {
                 {files?.map((el, i) => (
                   <a
                     key={i}
-                    href="#"
+                    href="easy-travels-app.vercel.app"
                     target="_blank"
                     className=" border-b border-stone-100 "
                   >

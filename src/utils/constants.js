@@ -11,11 +11,30 @@ export const excludedKeys = [
   "Control",
   "Alt",
   "Enter",
+  "Escape",
+  "F1",
+  "F2",
+  "F3",
+  "F4",
+  "F5",
+  "F6",
+  "F7",
+  "F8",
+  "F9",
+  "F10",
+  "F11",
+  "F12",
+  "Meta",
+  "Insert",
+  "Tab",
+  "PageUp",
+  "PageDown",
+  "Delete",
 ];
 
 export const fileTree = {
   software: {
-    node: ["easy-travels-app.js"],
+    node: ["easy-travels.js"],
   },
   devOps: { docker: ["microservices.yml"] },
 };

@@ -24,8 +24,8 @@ function User() {
     setCmdArr,
     setDirectoryArr,
     directoryArr,
-    // cmdArr,
-    // folderInfo,
+    cmdArr,
+    folderInfo,
     setFolderInfo,
   } = useAppContext();
 
@@ -37,7 +37,8 @@ function User() {
       if (key === "Enter") {
         const command = textArr.join("").trim();
 
-        const path = command.split(" ").at(1) || "";
+        const [_, ...others] = command.split(" ");
+        const path = others?.join("") || "";
 
         if (path === "..") {
           const lastFolder = curPathArr.at(-1);
@@ -119,7 +120,7 @@ function User() {
             ];
           });
 
-          setFolderInfo((cur) => [...cur, cur.at(-1)]);
+          setFolderInfo((cur) => [cur.at(-1)]);
         } else {
           setCmdArr((cur) => {
             console.log(cur);
@@ -235,9 +236,9 @@ function User() {
     return () => document.removeEventListener("keydown", listener);
   }, [setCmdArr, setDirectoryArr, setFolderInfo]);
 
-  // useEffect(() => {
-  //   console.log(cmdArr, directoryArr, folderInfo);
-  // }, [cmdArr, directoryArr, folderInfo]);
+  useEffect(() => {
+    console.log(cmdArr, directoryArr, folderInfo);
+  }, [cmdArr, directoryArr, folderInfo]);
 
   return (
     <div className="max-w-full tracking-wider">
