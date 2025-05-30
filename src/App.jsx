@@ -62,7 +62,7 @@ function App() {
                 {files?.map((el, i) => (
                   <a
                     key={i}
-                    href="easy-travels-app.vercel.app"
+                    href="https://easy-travels-app.vercel.app"
                     target="_blank"
                     className=" border-b border-stone-100 "
                   >
