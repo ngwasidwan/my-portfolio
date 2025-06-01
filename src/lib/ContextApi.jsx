@@ -4,7 +4,6 @@ import { fileTree } from "../utils/constants";
 const AppContext = createContext();
 
 const folders = Object.keys(fileTree);
-// const files = [];
 
 function ContextApi({ children }) {
   const [cmdArr, setCmdArr] = useState([
@@ -12,17 +11,12 @@ function ContextApi({ children }) {
       command: "home",
       path: "",
       pathFound: true,
-      // homeDir: true,
-      // files,
-      // folders,
       id: 0,
     },
   ]);
 
   const [folderInfo, setFolderInfo] = useState([{ folders }]);
   const [directoryArr, setDirectoryArr] = useState([""]);
-
-  // const [folderInfo, setFolderInfo] = useState(false);
 
   return (
     <AppContext.Provider

@@ -15,9 +15,8 @@ function App() {
 
         const [command, ...others] = commandStr.split(" ");
         const path = others.join(" ");
-        console.log(path);
-        const files = folderInfo.at(i).files;
-        const folders = folderInfo.at(i).folders;
+
+        const { files, folders, found } = folderInfo.at(i);
 
         if (command === "clear") return null;
 
@@ -57,28 +56,44 @@ function App() {
           return (
             <div key={i} className="mb-2">
               <PrevCmd command={commandStr} id={id} />
-
-              <div className="flex gap-4">
-                {files?.map((el, i) => (
-                  <a
-                    key={i}
-                    href="https://easy-travels-app.vercel.app"
-                    target="_blank"
-                    className=" border-b border-stone-100 "
-                  >
-                    {el}
-                  </a>
-                ))}
-              </div>
-              <div className="flex gap-4">
-                {folders?.map((el, i) => (
-                  <p key={i} className="text-blue-500">
-                    {el}
-                  </p>
-                ))}
-              </div>
+              {!found ? (
+                <p>
+                  ls: cannot access &apos;{path}&apos;: No such file or
+                  directory
+                </p>
+              ) : (
+                <div>
+                  <div className="flex gap-4">
+                    {files?.map((el, i) => {
+                      return (
+                        <a
+                          key={i}
+                          href="https://easy-travels-app.vercel.app"
+                          target="_blank"
+                          className=" border-b border-stone-100 "
+                        >
+                          {el}
+                        </a>
+                      );
+                    })}
+                  </div>
+                  <div className="flex gap-4">
+                    {folders?.map((el, i) => (
+                      <p key={i} className="text-blue-500">
+                        {el}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           );
+        }
+
+        if (command === "cat") {
+          console.log(files);
+          if (!files && folders.includes(path)) console.log("is a directory");
+          if (!files?.includes(path)) console.log("no file");
         }
 
         return (
