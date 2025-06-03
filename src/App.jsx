@@ -6,7 +6,7 @@ import { useAppContext } from "./lib/ContextApi";
 import PrevCmd from "./components/PrevCmd";
 
 function App() {
-  const { cmdArr, folderInfo } = useAppContext();
+  const { cmdArr, folderInfo, fileData } = useAppContext();
 
   return (
     <main className="text-white font-mono text-sm tracking-wide flex flex-col ">
@@ -63,17 +63,12 @@ function App() {
                 </p>
               ) : (
                 <div>
-                  <div className="flex gap-4">
+                  <div className="flex gap-8">
                     {files?.map((el, i) => {
                       return (
-                        <a
-                          key={i}
-                          href="https://easy-travels-app.vercel.app"
-                          target="_blank"
-                          className=" border-b border-stone-100 "
-                        >
+                        <p key={i} className=" ">
                           {el}
-                        </a>
+                        </p>
                       );
                     })}
                   </div>
@@ -91,9 +86,53 @@ function App() {
         }
 
         if (command === "cat") {
-          console.log(files);
-          if (!files && folders.includes(path)) console.log("is a directory");
-          if (!files?.includes(path)) console.log("no file");
+          const { status, message, data } = fileData.at(i);
+
+          if (status === "fail")
+            return (
+              <div key={i} className="mb-2">
+                <PrevCmd command={commandStr} id={id} />
+                <p> {message}</p>
+              </div>
+            );
+
+          if (status === "success")
+            return (
+              <div key={i} className="mb-2 flex flex-col gap-2">
+                <PrevCmd command={commandStr} id={id} />
+
+                <div className="flex gap-2">
+                  <span>visit:</span>
+                  <a
+                    href={`${data.link}`}
+                    target="_blank"
+                    className=" border-b border-white "
+                  >
+                    {data.title}
+                  </a>
+                </div>
+
+                <div className="flex gap-1  ">
+                  <span>core tech: </span>
+
+                  <p className="flex ">
+                    {data.stack.map((el, i) => (
+                      <span key={i}>{el}|</span>
+                    ))}
+                  </p>
+                </div>
+
+                <div>
+                  <h2>description</h2>
+                  {data.description.map((el, i) => (
+                    <p key={i}>
+                      <span className="mr-1">#</span>
+                      <span>{el}</span>
+                    </p>
+                  ))}
+                </div>
+              </div>
+            );
         }
 
         return (

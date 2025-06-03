@@ -17,6 +17,7 @@ function ContextApi({ children }) {
 
   const [folderInfo, setFolderInfo] = useState([{ folders }]);
   const [directoryArr, setDirectoryArr] = useState([""]);
+  const [fileData, setFileData] = useState([{ status: "", message: "" }]);
 
   return (
     <AppContext.Provider
@@ -27,6 +28,8 @@ function ContextApi({ children }) {
         setDirectoryArr,
         folderInfo,
         setFolderInfo,
+        fileData,
+        setFileData,
       }}
     >
       {children}
@@ -42,6 +45,8 @@ export function useAppContext() {
     setDirectoryArr,
     folderInfo,
     setFolderInfo,
+    fileData,
+    setFileData,
   } = useContext(AppContext);
 
   return {
@@ -51,6 +56,8 @@ export function useAppContext() {
     setDirectoryArr,
     folderInfo,
     setFolderInfo,
+    fileData,
+    setFileData,
   };
 }
 

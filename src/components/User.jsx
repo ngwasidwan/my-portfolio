@@ -4,26 +4,25 @@ import {
   excludedKeys,
   fileTree,
   NEXT_CARET_POSITION,
+  dataObj,
 } from "../utils/constants";
 import { useAppContext } from "../lib/ContextApi";
 
 const curPathArr = [];
+const textArr = [];
+const allCommands = [];
+
 let pathFound = true;
+let caretIndex = 0;
+let commandAt;
 
 const getCurDir = (pathArr, path) => {
-  console.log(pathArr);
   const curDir = pathArr.reduce((acc, cur) => {
     return acc[cur];
   }, fileTree);
 
   return path ? curDir[path] : curDir;
-  // return curDir[path];
 };
-
-let caretIndex = 0;
-const textArr = [];
-const allCommands = [];
-let commandAt;
 
 const nextPosition = (caretIndex) =>
   (!caretIndex ? 0 : caretIndex === 1 ? 1 : caretIndex) * NEXT_CARET_POSITION;
@@ -37,6 +36,8 @@ function User() {
     cmdArr,
     folderInfo,
     setFolderInfo,
+    setFileData,
+    fileData,
   } = useAppContext();
 
   ////// TO EXECUTE ONLY ON INITIAL PAGE LOAD
@@ -51,7 +52,77 @@ function User() {
 
         const path = others?.join("") || "";
 
+        /////////
         // #CODE REFACTORING LOADING ...
+        ///////////
+
+        //CAT COMMANDS
+        ////////////
+
+        if (command.startsWith("cat")) {
+          const curDir = getCurDir(curPathArr);
+          if (Array.isArray(curDir)) {
+            const found = curDir.find((el) => el === path);
+
+            if (!found) {
+              setFileData((cur) => [
+                ...cur,
+                {
+                  status: "fail",
+                  message: `cat: ${path}: No such file or directory`,
+                },
+              ]);
+            } else {
+              setFileData((cur) => [
+                ...cur,
+                { status: "success", data: dataObj[found] },
+              ]);
+            }
+          }
+
+          if (!Array.isArray(curDir) && curDir instanceof Object) {
+            const isDir = curDir[path];
+
+            if (isDir) {
+              setFileData((cur) => [
+                ...cur,
+                {
+                  status: "fail",
+                  message: `cat: ${path}: Is a directory`,
+                },
+              ]);
+            }
+
+            if (!isDir) {
+              setFileData((cur) => [
+                ...cur,
+                {
+                  status: "fail",
+                  message: `cat: ${path}: No such file or directory`,
+                },
+              ]);
+            }
+          }
+
+          setFolderInfo((cur) => {
+            console.log(cur);
+            return [...cur, cur.at(-1)];
+          });
+
+          setDirectoryArr((cur) => {
+            return [...cur, cur.at(-1)];
+          });
+
+          setCmdArr((cur) => [
+            ...cur,
+            {
+              command,
+              path,
+              pathFound,
+              id: cur.at(-1).id + 1,
+            },
+          ]);
+        }
 
         ////////
         ///CD COMMANDS
@@ -96,9 +167,13 @@ function User() {
             ];
           });
 
+          // const absPath = curPathArr.join("/");
           const absPath = curPathArr.join("/");
+          console.log(absPath);
 
-          setDirectoryArr((cur) => [...cur, absPath]);
+          // setDirectoryArr((cur) => [...cur, cur.at(-1)]);
+          setDirectoryArr((cur) => [...cur, absPath ? `/${absPath}` : absPath]);
+          setFileData((cur) => [...cur, cur.at(-1)]);
         }
 
         if (command !== "cd .." && command.startsWith("cd")) {
@@ -209,6 +284,8 @@ function User() {
               },
             ]);
           }
+
+          setFileData((cur) => [...cur, cur.at(-1)]);
         }
 
         /////////////
@@ -263,6 +340,7 @@ function User() {
               id: cur.at(-1).id + 1,
             },
           ]);
+          setFileData((cur) => [...cur, cur.at(-1)]);
         }
 
         if (command.startsWith("ls") && path !== "." && path) {
@@ -270,9 +348,14 @@ function User() {
 
           if (!elInPathArr) {
             const curDir = fileTree[path];
+
             if (Array.isArray(curDir)) {
+              console.log(curDir.filter((el) => el === path));
               setFolderInfo((cur) => {
-                return [...cur, { files: curDir, found: true }];
+                return [
+                  ...cur,
+                  { files: curDir.filter((el) => el === path), found: true },
+                ];
               });
             }
 
@@ -303,7 +386,7 @@ function User() {
                 return [
                   ...cur,
                   found
-                    ? { files: curDir, found, path }
+                    ? { files: curDir.filter((el) => el === path), found, path }
                     : { ...cur.at(-1), found, path },
                 ];
               });
@@ -350,6 +433,7 @@ function User() {
           setDirectoryArr((cur) => {
             return [...cur, cur.at(-1)];
           });
+          setFileData((cur) => [...cur, cur.at(-1)]);
         }
 
         //CLEAR COMMAND
@@ -366,6 +450,7 @@ function User() {
 
           setDirectoryArr((cur) => [cur.at(-1)]);
           setFolderInfo((cur) => [cur.at(-1)]);
+          setFileData((cur) => [cur.at(-1)]);
         }
 
         if (command === "help" || command === "home") {
@@ -382,6 +467,7 @@ function User() {
 
           setDirectoryArr((cur) => [...cur, cur.at(-1)]);
           setFolderInfo((cur) => [...cur, cur.at(-1)]);
+          setFileData((cur) => [...cur, cur.at(-1)]);
         }
 
         textArr.splice(0, textArr.length);
@@ -478,11 +564,11 @@ function User() {
     document.addEventListener("keydown", listener);
 
     return () => document.removeEventListener("keydown", listener);
-  }, [setCmdArr, setDirectoryArr, setFolderInfo]);
+  }, [setCmdArr, setDirectoryArr, setFolderInfo, setFileData]);
 
   useEffect(() => {
-    console.log(cmdArr, directoryArr, folderInfo);
-  }, [cmdArr, directoryArr, folderInfo]);
+    console.log(cmdArr, directoryArr, folderInfo, fileData);
+  }, [cmdArr, directoryArr, folderInfo, fileData]);
 
   return (
     <div className="max-w-full tracking-wider">
