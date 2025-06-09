@@ -140,8 +140,6 @@ function User() {
               return acc[cur];
             }, fileTree);
 
-            console.log(elInPathArr, curPathArr, curDir);
-
             if (valIsArr(curDir)) {
               setFolderInfo((cur) => [...cur, { files: curDir }]);
             }
@@ -153,24 +151,18 @@ function User() {
             }
           }
 
-          setCmdArr((cur) => {
-            console.log(cur);
-            return [
-              ...cur,
-              {
-                command,
-                path,
-                pathFound,
-                id: cur.at(-1).id + 1,
-              },
-            ];
-          });
+          setCmdArr((cur) => [
+            ...cur,
+            {
+              command,
+              path,
+              pathFound,
+              id: cur.at(-1).id + 1,
+            },
+          ]);
 
-          // const absPath = curPathArr.join("/");
           const absPath = curPathArr.join("/");
-          console.log(absPath);
 
-          // setDirectoryArr((cur) => [...cur, cur.at(-1)]);
           setDirectoryArr((cur) => [...cur, absPath ? `/${absPath}` : absPath]);
           setFileData((cur) => [...cur, cur.at(-1)]);
         }
@@ -181,15 +173,11 @@ function User() {
           if (!elInPathArr) {
             const curDir = fileTree[path];
 
-            console.log(curDir);
-
             if (valIsArr(curDir)) {
               curPathArr.push(path);
 
               pathFound = true;
-              setFolderInfo((cur) => {
-                return [...cur, { files: curDir }];
-              });
+              setFolderInfo((cur) => [...cur, { files: curDir }]);
             }
 
             if (!valIsArr(curDir) && curDir instanceof Object) {
@@ -197,19 +185,14 @@ function User() {
               curPathArr.push(path);
               pathFound = true;
 
-              console.log("found and object");
-
-              console.log(curPathArr, curDir, folders);
               setFolderInfo((cur) => [...cur, { folders }]);
             }
 
             if (!curDir) {
               pathFound = false;
               setFolderInfo((cur) => {
-                console.log(cur);
                 return [...cur, cur.at(-1)];
               });
-              console.log("not found");
             }
 
             const absPath = curPathArr.join("/");
@@ -251,7 +234,6 @@ function User() {
               curPathArr.push(path);
               pathFound = true;
 
-              console.log(curPathArr, curDir, folders);
               setFolderInfo((cur) => [...cur, { folders }]);
 
               const absPath = curPathArr.join("/");
@@ -264,7 +246,6 @@ function User() {
             if (!curDir) {
               pathFound = false;
               setFolderInfo((cur) => {
-                console.log(cur);
                 return [...cur, cur.at(-1)];
               });
 
@@ -294,12 +275,8 @@ function User() {
           const elInPathArr = curPathArr.at(-1);
 
           if (!elInPathArr) {
-            // const curDir = fileTree;
             const folders = Object.keys(fileTree);
 
-            console.log("found and object");
-
-            // console.log(curPathArr, curDir, folders);
             setFolderInfo((cur) => [...cur, { folders, found: true }]);
           }
 
@@ -471,27 +448,23 @@ function User() {
 
       //ARROW_UP COMMAND
       if (key === "ArrowUp") {
-        if (commandAt <= 0) return;
-        // if (!Number.isFinite(commandAt)) return;
-        console.log(commandAt);
-        const commandStr = allCommands.at(commandAt - 1);
+        const commandStr = allCommands.at(commandAt);
+
         setInputText(commandStr);
 
         textArr.splice(0, textArr.length, ...commandStr);
         caretIndex = commandStr?.length;
         setMoveCaretTo(caretIndex * NEXT_CARET_POSITION);
 
-        commandAt -= 1;
+        commandAt = commandAt ? commandAt - 1 : 0;
       }
 
       //ARROW_DOWN COMMAND
       if (key === "ArrowDown") {
         if (commandAt + 1 >= allCommands.length) return;
 
-        console.log(commandAt, allCommands);
         const commandStr = allCommands.at(commandAt + 1);
 
-        console.log(commandAt, allCommands);
         setInputText(commandStr);
 
         textArr.splice(0, textArr.length, ...commandStr);
@@ -499,9 +472,6 @@ function User() {
         setMoveCaretTo(caretIndex * NEXT_CARET_POSITION);
 
         commandAt += 1;
-        // commandAt =
-        //   commandAt >= allCommands.length - 1 ? commandAt : (commandAt += 1);
-        console.log(commandAt);
       }
 
       //BACKSPACE COMMAND
