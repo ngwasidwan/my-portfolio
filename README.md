@@ -2,10 +2,10 @@
 
 ## Project setup
 
-run npm run dev to start vite
+run npm run dev to start application
 
 ## about
 
-portfolio about me (sidwan)
+portfolio about me (sidwan @sabipikin#njaka)
 
-contains home page, skills, some few personal project screenshots in the projects page, my contact and a link to my github account
+contains home, help, cd, ls, .., cat, commands.

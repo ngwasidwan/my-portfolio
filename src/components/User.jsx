@@ -16,6 +16,8 @@ let pathFound = true;
 let caretIndex = 0;
 let commandAt;
 
+const valIsArr = (val) => Array.isArray(val);
+
 const getCurDir = (pathArr, path) => {
   const curDir = pathArr.reduce((acc, cur) => {
     return acc[cur];
@@ -33,11 +35,8 @@ function User() {
     setCmdArr,
     setDirectoryArr,
     directoryArr,
-    cmdArr,
-    folderInfo,
     setFolderInfo,
     setFileData,
-    fileData,
   } = useAppContext();
 
   ////// TO EXECUTE ONLY ON INITIAL PAGE LOAD
@@ -49,6 +48,7 @@ function User() {
         const command = textArr.join("").trim();
 
         const [_, ...others] = command.split(" ");
+        console.log(_);
 
         const path = others?.join("") || "";
 
@@ -61,7 +61,7 @@ function User() {
 
         if (command.startsWith("cat")) {
           const curDir = getCurDir(curPathArr);
-          if (Array.isArray(curDir)) {
+          if (valIsArr(curDir)) {
             const found = curDir.find((el) => el === path);
 
             if (!found) {
@@ -80,7 +80,7 @@ function User() {
             }
           }
 
-          if (!Array.isArray(curDir) && curDir instanceof Object) {
+          if (!valIsArr(curDir) && curDir instanceof Object) {
             const isDir = curDir[path];
 
             if (isDir) {
@@ -105,7 +105,6 @@ function User() {
           }
 
           setFolderInfo((cur) => {
-            console.log(cur);
             return [...cur, cur.at(-1)];
           });
 
@@ -143,11 +142,11 @@ function User() {
 
             console.log(elInPathArr, curPathArr, curDir);
 
-            if (Array.isArray(curDir)) {
+            if (valIsArr(curDir)) {
               setFolderInfo((cur) => [...cur, { files: curDir }]);
             }
 
-            if (!Array.isArray(curDir)) {
+            if (!valIsArr(curDir)) {
               const folders = Object.keys(curDir);
 
               setFolderInfo((cur) => [...cur, { folders }]);
@@ -184,7 +183,7 @@ function User() {
 
             console.log(curDir);
 
-            if (Array.isArray(curDir)) {
+            if (valIsArr(curDir)) {
               curPathArr.push(path);
 
               pathFound = true;
@@ -193,7 +192,7 @@ function User() {
               });
             }
 
-            if (!Array.isArray(curDir) && curDir instanceof Object) {
+            if (!valIsArr(curDir) && curDir instanceof Object) {
               const folders = Object.keys(curDir);
               curPathArr.push(path);
               pathFound = true;
@@ -232,7 +231,7 @@ function User() {
           if (elInPathArr) {
             const curDir = getCurDir(curPathArr, path);
 
-            if (Array.isArray(curDir)) {
+            if (valIsArr(curDir)) {
               curPathArr.push(path);
 
               pathFound = true;
@@ -247,7 +246,7 @@ function User() {
               ]);
             }
 
-            if (!Array.isArray(curDir) && curDir instanceof Object) {
+            if (!valIsArr(curDir) && curDir instanceof Object) {
               const folders = Object.keys(curDir);
               curPathArr.push(path);
               pathFound = true;
@@ -309,15 +308,14 @@ function User() {
               return acc[cur];
             }, fileTree);
 
-            console.log(curDirInfo);
-            if (Array.isArray(curDirInfo)) {
+            if (valIsArr(curDirInfo)) {
               setFolderInfo((cur) => [
                 ...cur,
                 { files: curDirInfo, found: true },
               ]);
             }
 
-            if (!Array.isArray(curDirInfo)) {
+            if (!valIsArr(curDirInfo)) {
               const folders = Object.keys(curDirInfo);
 
               setFolderInfo((cur) => {
@@ -327,7 +325,6 @@ function User() {
           }
 
           setDirectoryArr((cur) => {
-            console.log(cur);
             return [...cur, cur.at(-1)];
           });
 
@@ -349,8 +346,7 @@ function User() {
           if (!elInPathArr) {
             const curDir = fileTree[path];
 
-            if (Array.isArray(curDir)) {
-              console.log(curDir.filter((el) => el === path));
+            if (valIsArr(curDir)) {
               setFolderInfo((cur) => {
                 return [
                   ...cur,
@@ -359,10 +355,8 @@ function User() {
               });
             }
 
-            if (!Array.isArray(curDir) && curDir instanceof Object) {
+            if (!valIsArr(curDir) && curDir instanceof Object) {
               const folders = Object.keys(curDir);
-
-              console.log("found and object");
 
               setFolderInfo((cur) => [...cur, { folders, found: true }]);
             }
@@ -370,7 +364,6 @@ function User() {
             if (!curDir) {
               pathFound = false;
               setFolderInfo((cur) => {
-                console.log(cur);
                 return [...cur, { ...cur.at(-1), found: false }];
               });
             }
@@ -378,9 +371,8 @@ function User() {
 
           if (elInPathArr) {
             const curDir = getCurDir(curPathArr);
-            if (Array.isArray(curDir)) {
+            if (valIsArr(curDir)) {
               const found = curDir.includes(path);
-              console.log(found);
 
               setFolderInfo((cur) => {
                 return [
@@ -392,17 +384,17 @@ function User() {
               });
             }
 
-            if (!Array.isArray(curDir) && curDir instanceof Object) {
+            if (!valIsArr(curDir) && curDir instanceof Object) {
               const nextFiles = curDir[path];
 
-              if (Array.isArray(nextFiles) && nextFiles) {
+              if (valIsArr(nextFiles) && nextFiles) {
                 setFolderInfo((cur) => [
                   ...cur,
                   { files: nextFiles, found: true },
                 ]);
               }
 
-              if (!Array.isArray(nextFiles) && nextFiles) {
+              if (!valIsArr(nextFiles) && nextFiles) {
                 const folders = Object.keys(nextFiles);
 
                 setFolderInfo((cur) => [...cur, { folders, found: true }]);
@@ -410,25 +402,21 @@ function User() {
               if (!nextFiles) {
                 pathFound = false;
                 setFolderInfo((cur) => {
-                  console.log(cur);
                   return [...cur, { ...cur.at(-1), found: false }];
                 });
               }
             }
           }
 
-          setCmdArr((cur) => {
-            console.log(cur);
-            return [
-              ...cur,
-              {
-                command,
-                path,
-                pathFound,
-                id: cur.at(-1).id + 1,
-              },
-            ];
-          });
+          setCmdArr((cur) => [
+            ...cur,
+            {
+              command,
+              path,
+              pathFound,
+              id: cur.at(-1).id + 1,
+            },
+          ]);
 
           setDirectoryArr((cur) => {
             return [...cur, cur.at(-1)];
@@ -483,20 +471,9 @@ function User() {
 
       //ARROW_UP COMMAND
       if (key === "ArrowUp") {
-        if (!Number.isFinite(commandAt)) return;
-        const commandStr = allCommands.at(commandAt);
-        setInputText(commandStr);
-
-        textArr.splice(0, textArr.length, ...commandStr);
-        caretIndex = commandStr?.length;
-        setMoveCaretTo(caretIndex * NEXT_CARET_POSITION);
-
-        commandAt = commandAt ? (commandAt -= 1) : 0;
-      }
-
-      //ARROW_DOWN COMMAND
-      if (key === "ArrowDown") {
-        if (!Number.isFinite(commandAt)) return;
+        if (commandAt <= 0) return;
+        // if (!Number.isFinite(commandAt)) return;
+        console.log(commandAt);
         const commandStr = allCommands.at(commandAt - 1);
         setInputText(commandStr);
 
@@ -504,8 +481,27 @@ function User() {
         caretIndex = commandStr?.length;
         setMoveCaretTo(caretIndex * NEXT_CARET_POSITION);
 
-        commandAt =
-          commandAt >= allCommands.length - 1 ? commandAt : (commandAt += 1);
+        commandAt -= 1;
+      }
+
+      //ARROW_DOWN COMMAND
+      if (key === "ArrowDown") {
+        if (commandAt + 1 >= allCommands.length) return;
+
+        console.log(commandAt, allCommands);
+        const commandStr = allCommands.at(commandAt + 1);
+
+        console.log(commandAt, allCommands);
+        setInputText(commandStr);
+
+        textArr.splice(0, textArr.length, ...commandStr);
+        caretIndex = commandStr?.length;
+        setMoveCaretTo(caretIndex * NEXT_CARET_POSITION);
+
+        commandAt += 1;
+        // commandAt =
+        //   commandAt >= allCommands.length - 1 ? commandAt : (commandAt += 1);
+        console.log(commandAt);
       }
 
       //BACKSPACE COMMAND
@@ -565,10 +561,6 @@ function User() {
 
     return () => document.removeEventListener("keydown", listener);
   }, [setCmdArr, setDirectoryArr, setFolderInfo, setFileData]);
-
-  useEffect(() => {
-    console.log(cmdArr, directoryArr, folderInfo, fileData);
-  }, [cmdArr, directoryArr, folderInfo, fileData]);
 
   return (
     <div className="max-w-full tracking-wider">

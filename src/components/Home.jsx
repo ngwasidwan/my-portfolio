@@ -2,8 +2,7 @@ function Home() {
   return (
     <div>
       <div className="flex gap-1 items-center mb-4">
-        <p className="mr-2">sabipikin@njaka </p>
-        <p> {"[...ideas].map((idea) => 'I.T')"}</p>
+        <p>kubectl create deployment I.T --image=ideas</p>
       </div>
 
       <div className="flex gap-1 flex-col mb-4 ml-2">
@@ -11,10 +10,13 @@ function Home() {
           <p className="w-24 ">* Role:</p>
           <h1>Software Engineer</h1>
         </div>
-
         <div className="flex ">
           <p className="w-24 ">* Email:</p>
           <p>sabipikinboyz.njaka@gmail.com</p>
+        </div>
+        <div className="flex">
+          <p className="w-24 ">* Author:</p>
+          <h1>sabipikin@njaka</h1>
         </div>
 
         <div className="flex ">

@@ -35,6 +35,7 @@ export const excludedKeys = [
 export const fileTree = {
   software: {
     node: ["easy-travels.js", "easy-travels-dashboard.js"],
+    react: ["queens's cuisine"],
   },
   devOps: { docker: ["microservices.yml"] },
 };
