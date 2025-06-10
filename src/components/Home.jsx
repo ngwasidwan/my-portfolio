@@ -24,7 +24,7 @@ function Home() {
           <a
             href="https://github.com/ngwasidwan"
             target="_blank"
-            className=" border-b border-stone-100 "
+            className="border-b border-blue-500 text-blue-500"
           >
             https://github.com/ngwasidwan
           </a>
@@ -35,7 +35,7 @@ function Home() {
           <a
             href="https://linkedin.com/ngwasidwan"
             target="_blank"
-            className="border-b border-stone-100 "
+            className="border-b border-blue-500 text-blue-500"
           >
             https://linkedin.com/in/ngwasidwan
           </a>
