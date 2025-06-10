@@ -106,16 +106,16 @@ function App() {
                   <a
                     href={`${data.link}`}
                     target="_blank"
-                    className=" border-b border-white "
+                    className=" border-b border-blue-500 text-blue-500"
                   >
                     {data.title}
                   </a>
                 </div>
 
                 <div className="flex gap-1  ">
-                  <span>core tech: </span>
+                  <span>core technologies: </span>
 
-                  <p className="flex ">
+                  <p className="flex text-green-800">
                     {data.stack.map((el, i) => (
                       <span key={i}>{el}|</span>
                     ))}
@@ -123,10 +123,9 @@ function App() {
                 </div>
 
                 <div>
-                  <h2>description</h2>
-                  {data.description.map((el, i) => (
-                    <p key={i}>
-                      <span className="mr-1">#</span>
+                  {data.features.map((el, i) => (
+                    <p key={i} className="text-stone-500 ">
+                      <span className="mr-2">#</span>
                       <span>{el}</span>
                     </p>
                   ))}

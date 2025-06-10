@@ -34,64 +34,76 @@ export const excludedKeys = [
 
 export const fileTree = {
   software: {
-    node: ["easy-travels.js", "easy-travels-dashboard.js"],
-    react: ["files still to be added ..."],
+    server: ["road-trip-api.js", "leewah-api.js"],
+    client: ["road-trip.js", "road-trip-dashboard.js"],
   },
   devOps: { docker: ["microservices.yml"] },
 };
 
 export const dataObj = {
-  "easy-travels-dashboard.js": {
-    title: "easy travels admin dashboard",
-    stack: [
-      "react",
-      "node js",
-      "tailwind css",
-      "socket.io",
-      "express",
-      "mongodb",
-      "mongoose",
+  "road-trip-api.js": {
+    title: "bus agency management system api",
+    stack: ["node js", "express/REST", "mongodb", "mongoose", "socket.io"],
+    link: "https://github.com/ngwasidwan/Easy-travels-server",
+    features: [
+      "server app for a bus agency, handling all internal and external agency processes",
+      "App uses monolithic architectural system with mvc pattern",
+      "2FA for admin access",
+      "jwt authentication with RBAC",
+      "online booking of tickets with live seat update functionality with socket.io",
     ],
+  },
+
+  "leewah-api.js": {
+    title: "school management system api",
+    stack: ["node js", "express/REST", "mongodb", "mongoose"],
+    link: "https://github.com/ngwasidwan/leewah",
+    features: [
+      "server app for a school management system",
+      "App uses monolithic architectural system with mvc pattern",
+      "2FA for authorizing user access",
+      "jwt authentication with RBAC",
+      "Registering of students, payment of fees, accessing past exam questions",
+    ],
+  },
+
+  "road-trip-dashboard.js": {
+    title: "road trip admin dashboard",
+    stack: ["react js", "context api", "tailwind css"],
     link: "https://easy-travels-admin-dashboard.vercel.app",
-    description: [
-      "web app for managing all internal and external bus agency processes",
+    features: [
+      "client app for managing all internal and external bus agency processes",
       "seats selection updates in real time",
       "2FA for authorizing admin access",
       "qr scanner for verifying traveling tickets",
       "storing and retrieving all booking data",
-      "computing the number of seats booked, calculating the number of seats already checked onboard by ticket checkers etc ",
+      "computing the number of seats booked, calculating the number of seats already checked onboard by ticket checkers etc",
     ],
   },
-  "easy-travels.js": {
-    title: "easy travels",
+
+  "road-trip.js": {
+    title: "Road Trip",
     link: "https://easy-travels-app.vercel.app",
-    stack: [
-      "react",
-      "node js",
-      "tailwind css",
-      "socket.io",
-      "express",
-      "mongodb",
-      "mongoose",
-    ],
-    description: [
-      "web app for managing online booking of bus tickers with momo payment",
+    stack: ["react js", "context api", "tailwind css"],
+    features: [
+      "fast and easy booking of bus tickets online with momo payments",
       "seats selection updates in real time",
-      "booking reschedule functionality.",
-      "Search booking by bookingId and phone number",
+      "Best client optimization techniques to enhance user experience",
+      "implement caching strategies on the client to minimize cost",
+      "Search booking by bookingId and phone number,reschedule functionality etc",
     ],
   },
 
   "microservices.yml": {
-    title: "leewah api ",
+    title: "microservices demo app",
     stack: ["docker", "node js", "express"],
-    description: [
-      "app is made of 2 services which can be accessed through an express gateway.",
-      "Each service is connected to its own database.",
-      "authentication at express api gateway",
-      "only authenticated users can access a student account",
+    features: [
+      "App is built following the  microservices architecture with mvc pattern",
+      "All requests pass through the express api gateway.",
+      "App is made of a users service, students service, school service and payment service",
+      "Each service is connected to its own database to enhance scalability",
+      "2FA with jwt authentication at api gateway",
     ],
     link: "#example-microservices",
-    aim: "demo app for mastering docker internals",
   },
 };
