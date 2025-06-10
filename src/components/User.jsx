@@ -7,6 +7,7 @@ import {
   dataObj,
 } from "../utils/constants";
 import { useAppContext } from "../lib/ContextApi";
+import { commands } from "../utils/commands";
 
 const curPathArr = [];
 const textArr = [];
@@ -47,8 +48,33 @@ function User() {
       if (key === "Enter") {
         const command = textArr.join("").trim();
 
-        const [_, ...others] = command.split(" ");
-        console.log(_);
+        const [firstCmd, ...others] = command.split(" ");
+        const commandsArr = commands.filter((el) => el.command === firstCmd);
+
+        if (
+          !commandsArr.length &&
+          !command.startsWith("cd") &&
+          !command.startsWith("cat")
+        ) {
+          setFolderInfo((cur) => {
+            return [...cur, cur.at(-1)];
+          });
+
+          setCmdArr((cur) => [
+            ...cur,
+            {
+              command,
+              path,
+              pathFound,
+              id: cur.at(-1).id + 1,
+            },
+          ]);
+
+          setDirectoryArr((cur) => {
+            return [...cur, cur.at(-1)];
+          });
+          setFileData((cur) => [...cur, cur.at(-1)]);
+        }
 
         const path = others?.join("") || "";
 
@@ -59,6 +85,7 @@ function User() {
         //CAT COMMANDS
         ////////////
 
+        // if (path === "cat") {
         if (command.startsWith("cat")) {
           const curDir = getCurDir(curPathArr);
           if (valIsArr(curDir)) {
@@ -168,6 +195,7 @@ function User() {
         }
 
         if (command !== "cd .." && command.startsWith("cd")) {
+          // if (command !== "cd .." && path === "cd") {
           const elInPathArr = curPathArr.at(-1);
 
           if (!elInPathArr) {
