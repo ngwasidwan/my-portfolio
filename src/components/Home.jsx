@@ -41,10 +41,15 @@ function Home() {
           </a>
         </div>
       </div>
-      <p className="mb-2">
+      <p className="mb-1">
         Njaka&apos;s Information as of {new Date().toDateString()}
       </p>
-      <p>Type &apos;help&apos; to see a list of help commands.</p>
+      <p className="mb-2">
+        Type &apos;help&apos; to see a list of help commands.
+      </p>
+      <p className="text-stone-500 font-semibold mb-2">
+        N.B: This terminal app functions properly only on desktop clients
+      </p>
     </div>
   );
 }

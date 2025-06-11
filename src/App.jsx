@@ -115,7 +115,7 @@ function App() {
                 <div className="flex gap-1  ">
                   <span>core technologies: </span>
 
-                  <p className="flex text-green-800">
+                  <p className="flex text-green-800 ">
                     {data.stack.map((el, i) => (
                       <span key={i}>{el}|</span>
                     ))}
@@ -124,7 +124,7 @@ function App() {
 
                 <div>
                   {data.features.map((el, i) => (
-                    <p key={i} className="text-stone-500 ">
+                    <p key={i} className="text-stone-500  ">
                       <span className="mr-2">#</span>
                       <span>{el}</span>
                     </p>

@@ -43,7 +43,7 @@ export const fileTree = {
 export const dataObj = {
   "road-trip-api.js": {
     title: "bus agency management system api",
-    stack: ["node js", "express/REST", "mongodb", "mongoose", "socket.io"],
+    stack: ["node js", "express-REST", "mongodb", "mongoose", "socket.io"],
     link: "https://github.com/ngwasidwan/Easy-travels-server",
     features: [
       "server app for a bus agency, handling all internal and external agency processes",
@@ -56,7 +56,7 @@ export const dataObj = {
 
   "leewah-api.js": {
     title: "school management system api",
-    stack: ["node js", "express/REST", "mongodb", "mongoose"],
+    stack: ["node js", "express-REST", "mongodb", "mongoose"],
     link: "https://github.com/ngwasidwan/leewah",
     features: [
       "server app for a school management system",
